@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASA FEIJUCA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+
+<div id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+        <form id="formLogin">
+
+            <div class="campo-login">
+                <input
+                    type="text"
+                    id="usuarioLogin"
+                    placeholder="Usuário"
+                    required
+                >
+            </div>
+
+            <div class="campo-login">
+                <input
+                    type="password"
+                    id="senhaLogin"
+                    placeholder="Senha"
+                    required
+                >
+            </div>
+
+            <button
+                type="submit"
+                class="btn-login">
+                ENTRAR
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <img
+            src="assets/logo-casa-feijuca.png"
+            class="brand-logo"
+            alt="Casa Feijuca"
+        >
+
+       
+
+    </div>
+
+    <nav class="menu">
+
+        <button onclick="abrirModulo('dashboard')">
+            🏠 Dashboard
+        </button>
+
+        <button onclick="abrirModulo('mesas')">
+            🪑 Mesas
+        </button>
+
+        <button onclick="abrirModulo('produtos')">
+        
+            📦 Produtos
+        </button>
+
+        <button onclick="abrirModulo('fornecedores')">
+            🏢 Fornecedores
+        </button>
+
+        <button onclick="abrirModulo('recebimento')">
+            🚚 Recebimento
+        </button>
+
+        <button onclick="abrirModulo('conferencia')">
+            ✅ Conferência
+        </button>
+
+        <button onclick="abrirModulo('armazenamento')">
+            🏬 Armazenamento
+        </button>
+
+        <button onclick="abrirModulo('estoque')">
+            🧊 Estoque Bebidas
+        </button>
+
+        <button onclick="abrirModulo('cozinha')">
+            🍳 Estoque Cozinha
+        </button>
+
+        <button onclick="abrirModulo('saida')">
+            📤 Saída
+        </button>
+
+        <button onclick="abrirModulo('inventario')">
+            🧾 Inventário
+        </button>
+
+        <button onclick="abrirModulo('perdas')">
+            ⚠️ Perdas
+        </button>
+
+        <button onclick="abrirModulo('financeiro')">
+            📊 Financeiro
+        </button>
+
+        <button onclick="abrirModulo('historico')">
+            🕘 Histórico
+        </button>
+
+        <button onclick="abrirModulo('caixa')">
+            💰 Caixa
+        </button>
+
+    </nav>
+
+    <div class="sidebar-user">
+
+        <div class="avatar">
+            A
+        </div>
+
+        <div>
+
+            <strong id="nomeUsuarioSidebar">
+                Administrador
+            </strong>
+
+            <p>
+                ● Online
+            </p>
+
+        </div>
+
+    </div>
+
+</aside>
+
+<!-- CONTEÚDO -->
+
+<main class="main">
+
+    <div class="app-userbar">
+
+    <div class="app-userbar-left">
+        <span class="user-icon">👤</span>
+        <strong id="userbarNome">Garçom</strong>
+    </div>
+
+    <button class="userbar-sair" onclick="logout()">
+        🚪 Sair
+    </button>
+
+</div>
+
+  <header class="topbar">
+
+    <div class="top-left">
+        <button class="menu-toggle">☰</button>
+        <input type="text" placeholder="Buscar no sistema...">
+    </div>
+
+    <div class="top-right">
+        <span>🔔</span>
+
+        <div>
+            <strong id="nomeUsuarioLogado">
+                Administrador
+            </strong>
+
+            <p id="perfilUsuarioLogado">
+                Operador
+            </p>
+        </div>
+
+        <button class="btn-sair" onclick="logout()">
+            Sair
+        </button>
+    </div>
+
+</header>
+
+<section id="dashboard" class="modulo ativo">
+
+    <div class="page-title">
+        <div>
+            <h1>Dashboard</h1>
+            <p>Visão geral operacional da Casa Feijuca</p>
+        </div>
+
+        <button class="btn-primary" onclick="atualizarTela()">
+            Atualizar
+        </button>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-icon blue">📦</div>
+            <div>
+                <p>Produtos cadastrados</p>
+                <strong id="dashProdutos">0</strong>
+                <span class="positivo">Base automática</span>
+            </div>
+        </div>
+
+        <div class="card green-card">
+            <div class="card-icon green">📥</div>
+            <div>
+                <p>Entrada em unidades</p>
+                <strong id="dashEntradas">0</strong>
+                <span class="positivo">Fardos convertidos</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon blue">📤</div>
+            <div>
+                <p>Saídas em unidades</p>
+                <strong id="dashSaidas">0</strong>
+                <span class="positivo">Baixa automática</span>
+            </div>
+        </div>
+
+        <div class="card red-card">
+            <div class="card-icon red">⚠️</div>
+            <div>
+                <p>Perdas/Ajustes</p>
+                <strong id="dashPerdas">0</strong>
+                <span class="negativo">Acompanhar</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="painel">
+            <div class="painel-header">
+                <h2>Resumo do estoque</h2>
+                <button onclick="abrirModulo('estoque')">
+                    Ver completo
+                </button>
+            </div>
+
+            <div id="resumoDashboard"></div>
+        </div>
+
+        <div class="painel">
+            <div class="painel-header">
+                <h2>Alertas automáticos</h2>
+            </div>
+
+            <div id="alertasDashboard"></div>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="mesas" class="modulo">
+
+    <div class="garcom-mobile-logo">
+        <img src="assets/logo-casa-feijuca.png" alt="Casa Feijuca">
+    </div>
+
+    <div class="formulario formulario-garcom">
+
+        <div class="form-grid">
+
+            <input
+                type="tel"
+                inputmode="numeric"
+                id="buscarComandaGarcom"
+                placeholder="Número da comanda"
+            >
+
+            <input
+                type="tel"
+                inputmode="numeric"
+                id="mesaGarcom"
+                placeholder="Número da mesa"
+            >
+
+        </div>
+
+        <button class="btn-garcom" onclick="vincularMesaComanda()">
+            Abrir Lançamento
+        </button>
+
+    </div>
+
+    <div id="listaMesas"></div>
+
+</section>
+
+<section id="produtos" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Produtos</h1>
+            <p>Base mestre de bebidas, custo, venda e fornecedores</p>
+        </div>
+    </div>
+     
+     <div class="formulario">
+
+    <h2>Cadastrar Produto</h2>
+
+    <div class="form-grid">
+
+        <input type="text" id="novoCodigoProduto" placeholder="Código">
+        <input type="text" id="novoNomeProduto" placeholder="Nome do produto">
+        <input type="text" id="novaCategoriaProduto" placeholder="Categoria">
+        <input type="text" id="novoFornecedorProduto" placeholder="Fornecedor">
+
+        <input type="number" id="novasUnidadesFardoProduto" placeholder="Unidades por fardo">
+        <input type="number" id="novoEstoqueMinimoProduto" placeholder="Estoque mínimo">
+
+        <input type="number" step="0.01" id="novoCustoProduto" placeholder="Custo">
+        <input type="number" step="0.01" id="novoVendaProduto" placeholder="Venda">
+
+    </div>
+
+    <button onclick="cadastrarProdutoManual()">
+        Cadastrar Produto
+    </button>
+
+</div>
+
+    <input
+        type="text"
+        id="buscarProduto"
+        class="campo-busca"
+        placeholder="Pesquisar por código, produto, fornecedor ou categoria"
+        oninput="listarProdutos()"s
+    >
+
+    <div id="listaProdutos"></div>
+</section>
+
+<section id="fornecedores" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Fornecedores</h1>
+            <p>Cadastro de empresas fornecedoras dos produtos</p>
+        </div>
+    </div>
+
+    <form id="formFornecedor" class="formulario">
+
+        <input type="hidden" id="fornecedorEditandoId">
+
+        <div class="form-grid">
+            <input type="text" id="razaoSocialFornecedor" placeholder="Razão Social" required>
+            <input type="text" id="nomeFantasiaFornecedor" placeholder="Nome Fantasia" required>
+            <input type="text" id="cnpjFornecedor" placeholder="CNPJ">
+            <input type="text" id="telefoneFornecedor" placeholder="Telefone">
+            <input type="email" id="emailFornecedor" placeholder="E-mail">
+            <input type="text" id="contatoFornecedor" placeholder="Contato responsável">
+        </div>
+
+        <button type="submit" id="btnSalvarFornecedor">
+            Salvar Fornecedor
+        </button>
+    </form>
+
+    <input
+        type="text"
+        id="buscarFornecedor"
+        class="campo-busca"
+        placeholder="Pesquisar fornecedor por razão social, nome fantasia, CNPJ ou contato"
+        oninput="listarFornecedores()"
+    >
+
+    <div id="listaFornecedores"></div>
+</section>
+
+<section id="recebimento" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Recebimento Automático</h1>
+            <p>Digite o código e a quantidade de fardos. O sistema calcula as unidades.</p>
+        </div>
+    </div>
+
+    <form id="formRecebimento" class="formulario">
+        <div class="form-grid">
+            <input type="text" id="codigoRecebimento" placeholder="Código do produto. Ex: 101" required oninput="buscarProdutoRecebimento()">
+            <input type="text" id="produtoRecebido" placeholder="Produto" readonly>
+            <input type="text" id="fornecedorRecebimento" placeholder="Fornecedor" readonly>
+            <input type="text" id="categoriaRecebimento" placeholder="Categoria" readonly>
+            <input type="text" id="unidadesFardoRecebimento" placeholder="Unidades por fardo" readonly>
+            <input type="number" id="quantidadeFardos" placeholder="Quantidade de fardos" required oninput="calcularUnidadesRecebimento()">
+            <input type="text" id="totalUnidadesRecebimento" placeholder="Total em unidades" readonly>
+            <input type="text" id="localSugeridoRecebimento" placeholder="Local sugerido" readonly>
+            <input type="text" id="enderecoSugeridoRecebimento" placeholder="Endereço sugerido" readonly>
+            <input type="text" id="notaFiscal" placeholder="Número da nota fiscal" required>
+            <input type="text" id="conferenteRecebimento" placeholder="Conferente" required>
+        </div>
+
+        <button type="submit">
+            Registrar Recebimento
+        </button>
+    </form>
+</section>
+
+<section id="conferencia" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Conferência</h1>
+            <p>Aprovação envia automaticamente para armazenamento</p>
+        </div>
+    </div>
+
+    <div id="listaConferencia"></div>
+</section>
+
+<section id="armazenamento" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Armazenamento</h1>
+            <p>Produtos aprovados com endereço sugerido automaticamente</p>
+        </div>
+    </div>
+
+    <div id="listaArmazenamento"></div>
+</section>
+
+<section id="estoque" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Estoque Bebidas</h1>
+            <p>Saldo automático de bebidas: entradas - saídas - perdas + inventário</p>
+        </div>
+    </div>
+
+    <input
+        type="text"
+        id="buscarEstoque"
+        class="campo-busca"
+        placeholder="Pesquisar por código, produto ou fornecedor"
+        oninput="listarEstoque()"
+    >
+
+    <div id="listaEstoque"></div>
+</section>
+
+<section id="cozinha" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Estoque Cozinha</h1>
+            <p>Controle de insumos da cozinha da Casa Feijuca</p>
+        </div>
+    </div>
+
+    <div class="formulario">
+        <div class="form-grid">
+            <input type="text" id="nomeInsumoCozinha" placeholder="Insumo. Ex: Queijo, Feijão, Massa">
+            <input type="text" id="categoriaInsumoCozinha" placeholder="Categoria. Ex: Laticínio, Grãos, Carnes">
+            <input type="number" id="quantidadeInsumoCozinha" placeholder="Quantidade">
+            <input type="text" id="unidadeInsumoCozinha" placeholder="Unidade. Ex: kg, un, pacote">
+            <input type="text" id="localInsumoCozinha" placeholder="Local. Ex: Câmara fria, despensa">
+        </div>
+
+        <button onclick="cadastrarInsumoCozinha()">
+            Cadastrar Insumo
+        </button>
+    </div>
+
+    <div id="listaCozinha"></div>
+</section>
+
+<section id="saida" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Saída Automática por Unidade</h1>
+            <p>Digite ou bipe o código e informe a quantidade vendida.</p>
+        </div>
+    </div>
+
+    <form id="formSaida" class="formulario">
+        <div class="form-grid">
+            <input type="text" id="codigoSaida" placeholder="Código do produto. Ex: 101" required oninput="buscarProdutoSaida()">
+            <input type="text" id="produtoSaida" placeholder="Produto" readonly>
+            <input type="text" id="fornecedorSaida" placeholder="Fornecedor" readonly>
+            <input type="text" id="saldoAtualSaida" placeholder="Saldo atual em unidades" readonly>
+            <input type="number" id="quantidadeSaida" placeholder="Quantidade em unidades" required>
+
+            <select id="motivoSaida">
+                <option>Venda</option>
+                <option>Consumo Interno</option>
+                <option>Transferência</option>
+                <option>Outro</option>
+            </select>
+
+            <input type="text" id="responsavelSaida" placeholder="Responsável pela saída" required>
+        </div>
+
+        <button type="submit">
+            Confirmar Saída
+        </button>
+    </form>
+
+    <div id="listaSaidas"></div>
+</section>
+
+<section id="inventario" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Inventário Físico</h1>
+            <p>Compare o saldo do sistema com a contagem real e ajuste automaticamente.</p>
+        </div>
+    </div>
+
+    <form id="formInventario" class="formulario">
+        <div class="form-grid">
+            <input type="text" id="codigoInventario" placeholder="Código do produto. Ex: 101" required oninput="buscarProdutoInventario()">
+            <input type="text" id="produtoInventario" placeholder="Produto" readonly>
+            <input type="text" id="saldoSistemaInventario" placeholder="Saldo no sistema" readonly>
+            <input type="number" id="contagemFisica" placeholder="Contagem física em unidades" required oninput="calcularDiferencaInventario()">
+            <input type="text" id="diferencaInventario" placeholder="Diferença" readonly>
+            <input type="text" id="responsavelInventario" placeholder="Responsável pelo inventário" required>
+        </div>
+
+        <button type="submit">
+            Ajustar Estoque
+        </button>
+    </form>
+
+    <div id="listaInventarios"></div>
+</section>
+
+<section id="perdas" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Perdas</h1>
+            <p>Produtos recusados, avariados, impróprios ou ajustes negativos</p>
+        </div>
+    </div>
+
+    <div id="listaPerdas"></div>
+</section>
+
+<section id="financeiro" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Financeiro do Estoque</h1>
+            <p>Valor de custo, receita potencial e lucro estimado com base no saldo atual.</p>
+        </div>
+
+        <button class="btn-primary" onclick="listarFinanceiro()">
+            Recalcular
+        </button>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-icon blue">💰</div>
+            <div>
+                <p>Valor de custo em estoque</p>
+                <strong id="finCusto">R$ 0,00</strong>
+                <span class="positivo">Custo acumulado</span>
+            </div>
+        </div>
+
+        <div class="card green-card">
+            <div class="card-icon green">🏷️</div>
+            <div>
+                <p>Receita potencial</p>
+                <strong id="finReceita">R$ 0,00</strong>
+                <span class="positivo">Preço de venda</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon blue">📈</div>
+            <div>
+                <p>Lucro estimado</p>
+                <strong id="finLucro">R$ 0,00</strong>
+                <span class="positivo">Receita - custo</span>
+            </div>
+        </div>
+
+        <div class="card red-card">
+            <div class="card-icon red">📉</div>
+            <div>
+                <p>Itens sem estoque</p>
+                <strong id="finSemEstoque">0</strong>
+                <span class="negativo">Sem saldo disponível</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="painel">
+        <div class="painel-header">
+            <h2>Produtos com maior valor em estoque</h2>
+        </div>
+
+        <div id="listaFinanceiro"></div>
+    </div>
+</section>
+
+<section id="historico" class="modulo">
+    <div class="page-title">
+        <div>
+            <h1>Histórico</h1>
+            <p>Movimentações registradas automaticamente</p>
+        </div>
+    </div>
+
+    <div id="listaHistorico"></div>
+</section>
+
+<!-- NOVO MÓDULO DE LANÇAMENTO -->
+
+<section id="lancamento" class="modulo">
+
+    <div class="page-title">
+        <div>
+            <h1>Lançamento de Comanda</h1>
+            <p>Adicione bebidas, drinks ou pizza à la carte</p>
+        </div>
+
+        <button class="btn-primary" onclick="abrirModulo('mesas')">
+            Voltar para Mesas
+        </button>
+    </div>
+
+    <div class="painel">
+
+        <div class="painel-header">
+            <h2 id="tituloComandaLancamento">
+                Mesa
+            </h2>
+        </div>
+
+        <div class="formulario">
+
+            <input type="hidden" id="mesaLancamentoId">
+
+            <div class="form-grid">
+
+                <input
+                 type="text"
+                 id="buscarProdutoLancamento"
+                 placeholder="Buscar bebida, drink ou pizza"
+                 oninput="listarProdutosLancamento()"
+>
+
+                <select id="tipoItemLancamento" onchange="listarProdutosLancamento()">
+                 <option value="todos">Todos</option>
+                 <option value="bebida">Bebidas</option>
+                 <option value="pizza">Pizza À La Carte</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <div id="listaProdutosLancamento"></div>
+
+    </div>
+
+</section>
+
+<section id="caixa" class="modulo">
+
+    <div class="page-title">
+        <div>
+            <h1>Caixa</h1>
+        </div>
+    </div>
+
+    <div class="formulario">
+
+        <h2>Abrir Comanda</h2>
+
+        <div class="form-grid">
+
+            <input
+                type="number"
+                id="numeroComandaCaixa"
+                placeholder="Número da comanda. Ex: 152"
+            >
+
+            <select id="tipoRodizioCaixa">
+             <option value="semana">Rodízio Segunda a Quinta - R$ 69,99</option>
+             <option value="fimSemana">Rodízio Sexta e Sábado - R$ 74,99</option>
+             <option value="meio">Meio Rodízio Criança - R$ 59,99</option>
+             <option value="semRodizio">Sem Rodízio</option>
+            </select>
+
+        </div>
+
+        <button onclick="abrirComandaCaixa()">
+            Abrir Comanda
+        </button>
+
+    </div>
+
+    <div id="listaCaixa"></div>
+
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
