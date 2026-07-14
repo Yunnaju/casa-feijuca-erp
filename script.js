@@ -979,6 +979,22 @@ function liberarSistema(usuario){
 
     document.body.classList.remove("login-ativo");
     document.body.classList.add("logado");
+    document.body.classList.remove(
+    "perfil-administrador",
+    "perfil-gerente",
+    "perfil-caixa",
+    "perfil-garcom",
+    "perfil-bar"
+   );
+
+   const classePerfil =
+    "perfil-" +
+    String(usuario.perfil || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+
+    document.body.classList.add(classePerfil);
 
     document.getElementById("nomeUsuarioLogado").innerText =
         usuario.nome;
@@ -1085,20 +1101,27 @@ document.getElementById("formLogin").addEventListener("submit", function(event){
 function logout(){
 
     const usuarioLogado =
-        JSON.parse(
-            localStorage.getItem("usuarioLogado")
-        );
+        JSON.parse(localStorage.getItem("usuarioLogado"));
 
     if(usuarioLogado){
         registrarHistorico(
             `Logout realizado: ${usuarioLogado.nome}`
         );
+
         salvarDados();
     }
 
     localStorage.removeItem("usuarioLogado");
 
-    document.body.classList.remove("logado");
+    document.body.classList.remove(
+        "logado",
+        "perfil-administrador",
+        "perfil-gerente",
+        "perfil-caixa",
+        "perfil-garcom",
+        "perfil-bar"
+    );
+
     document.body.classList.add("login-ativo");
 
     document.getElementById("usuarioLogin").value = "";
